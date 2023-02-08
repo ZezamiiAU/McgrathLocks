@@ -22,20 +22,15 @@ function authenticate() {
     firebase
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
-        .then((s) => {
-            var idRef = db
-                .collection("users")
-                .get()
-                .then((s) => {
-                    console.log(s)
+        .then(function ({ user }) {
+            if (user) {
+                user.getIdToken().then((t) => {
+                    console.log("token: ", t)
                 })
-            return s
-        })
-        .then(function (user) {
-            console.log(user.user.uid)
-            user.user.getIdToken().then((t) => {
-                console.log("token: ", t)
-            })
+                window.location.replace("./integration")
+            } else {
+                errorMessage.innerHTML = "Something Went Wrong, Please Try Again"
+            }
         })
         .catch(function (error) {
             errorMessage.innerHTML = error.message
