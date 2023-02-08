@@ -3,6 +3,7 @@ var loginButton = document.getElementById("loginButton")
 
 loginButton.addEventListener("click", function (e) {
     e.preventDefault()
+    e.stopPropagation()
     authenticate()
 })
 
