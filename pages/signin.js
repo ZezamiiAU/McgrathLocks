@@ -1,8 +1,7 @@
 // Login Function
 const loginButton = document.getElementById("loginButton2")
-console.log(loginButton)
+
 loginButton.addEventListener("click", function (e) {
-    console.log("button clicked!")
     e.preventDefault()
     e.stopPropagation()
     authenticate()
@@ -11,7 +10,6 @@ loginButton.addEventListener("click", function (e) {
 function authenticate() {
     const emailInput = document.getElementById("LoginEmail").value
     const passwordInput = document.getElementById("LoginPassword").value
-
     const errorMessage = document.getElementById("loginErrorMessage")
 
     if (!emailInput || !passwordInput) {
@@ -23,7 +21,6 @@ function authenticate() {
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
         .then(function ({ user }) {
-            console.log(user)
             if (user) {
                 user.getIdToken().then((t) => {
                     console.log("token: ", t)
