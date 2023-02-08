@@ -1,66 +1,55 @@
 const signupButton = document.getElementById("signupButton")
+const errorMessage = document.getElementById("signupErrorMessage")
+const email = document.getElementById("signupEmail").value
+const displayName = document.getElementById("signupName").value
+const company = document.getElementById("signupCompany").value
+const phone = document.getElementById("signupPhone").value
+const password = document.getElementById("signupPassword").value
 signupButton.addEventListener("click", signup)
 
 async function signup(event) {
     event.preventDefault()
     event.stopPropagation()
-    const displayName = signupName.value
-    const company = signupCompany.value
-    const email = signupEmail.value
-    const phone = signupPhone.value
-    const password = signupPassword.value
-
-    const errorManager = {
-        createUserError: "",
-        signinUserError: "",
-        firestoreUserError: ""
-    }
-    console.log(errorManager)
 
     // Validate input fields
     if (!displayName || !company || !email || !phone || !password) {
-        alert("All fields are required. Please fill in all the details.")
+        errorMessage.innerHTML = "Please enter all required fields."
+        return
+    } else if (!/^\d+$/.test(phone)) {
+        errorMessage.innerHTML = "Phone number should only contain numbers."
+        return
+    } else if (!password || password.length < 8 || password.length > 15) {
+        errorMessage.innerHTML = "Password should be between 8 to 15 characters long."
+        return
+    } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/.test(password)) {
+        errorMessage.innerHTML = "Password should contain at least 1 letter, 1 number, and 1 special character."
         return
     }
 
-    if (!displayName) {
-        window.alert("Please enter your name.")
-        return
-    } else if (!company) {
-        window.alert("Please enter your company.")
-        return
-    } else if (!email) {
-        window.alert("Please enter your email address.")
-        return
-    } else if (!/^\d+$/.test(phone)) {
-        window.alert("Phone number should only contain numbers.")
-        return
-    } else if (!password || password.length < 8 || password.length > 15) {
-        window.alert("Password should be between 8 to 15 characters long.")
-        return
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/.test(password)) {
-        window.alert("Password should contain at least 1 letter, 1 number, and 1 special character.")
-        return
+    const errorManager = {
+        createUserError: null,
+        signinUserError: null,
+        firestoreUserError: null
     }
 
     // Check if email already exists
-    const emailCheck = await firebase
-        .auth()
-        .fetchSignInMethodsForEmail(email)
-        .then((methods) => {
-            if (methods.length > 0) {
-                return false
-            }
-            return true
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+    // const emailCheck = await firebase
+    //     .auth()
+    //     .fetchSignInMethodsForEmail(email)
+    //     .then((methods) => {
+    //         if (methods.length > 0) {
+    //             return false
+    //         }
+    //         return true
+    //     })
+    //     .catch((error) => {
+    //         console.error(error)
+    //     })
 
-    if (!emailCheck) {
-        window.alert("Email address already exists.")
-        return
-    }
+    // if (!emailCheck) {
+    //     errorMessage.innerHTML = "Email address already exists."
+    //     return
+    // }
 
     // Create a user under Authentication.
     await firebase
@@ -71,7 +60,7 @@ async function signup(event) {
         })
 
     // If no error then create the user under firestore.
-    if (errorManager.createUserError === "") {
+    if (errorManager.createUserError !== null) {
         // Login the newly created user.
         const user = await firebase
             .auth()
@@ -91,9 +80,6 @@ async function signup(event) {
             db.collection("users")
                 .doc(user.uid)
                 .set(obj)
-                .then(function (e) {
-                    console.log(user.uid)
-                })
                 .catch((e) => {
                     errorManager.firestoreUserError = e
                 })
@@ -104,12 +90,10 @@ async function signup(event) {
 
     // Check if there was any error
     if (errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError) {
-        alert("Please Agree To Terms Of Service Before Continuing")
-        console.log("Error manager", errorManager)
+        errorMessage.innerHTML =
+            errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError
         return
     }
 
-    // Redirect to dashboard on success
-    alert("Sign up successful!")
     window.location.replace("./integration")
 }
