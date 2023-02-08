@@ -20,8 +20,6 @@ const db = firebase.firestore()
 
 // Finalising the global config.
 
-var logoutButton = document.getElementById("logoutButton")
-
 function handleSignOut() {
     window.location.replace("./log-in")
 }
