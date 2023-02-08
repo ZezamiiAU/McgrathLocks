@@ -1,15 +1,15 @@
 const signupButton = document.getElementById("signupButton")
 const errorMessage = document.getElementById("signupErrorMessage")
-const email = document.getElementById("signupEmail").value
-const displayName = document.getElementById("signupName").value
-const company = document.getElementById("signupCompany").value
-const phone = document.getElementById("signupPhone").value
-const password = document.getElementById("signupPassword").value
 signupButton.addEventListener("click", signup)
 
 async function signup(event) {
     event.preventDefault()
     event.stopPropagation()
+    const email = document.getElementById("signupEmail").value
+    const displayName = document.getElementById("signupName").value
+    const company = document.getElementById("signupCompany").value
+    const phone = document.getElementById("signupPhone").value
+    const password = document.getElementById("signupPassword").value
 
     // Validate input fields
     if (!displayName || !company || !email || !phone || !password) {
