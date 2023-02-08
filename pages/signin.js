@@ -9,8 +9,8 @@ loginButton.addEventListener("click", function (e) {
 })
 
 function authenticate() {
-    const emailInput = document.getElementById("loginEmail").value
-    const passwordInput = document.getElementById("loginPassword").value
+    const emailInput = document.getElementById("LoginEmail").value
+    const passwordInput = document.getElementById("LoginPassword").value
 
     const errorMessage = document.getElementById("loginErrorMessage")
 
