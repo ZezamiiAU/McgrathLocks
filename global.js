@@ -24,19 +24,11 @@ var logoutButton = document.getElementById("logoutButton")
 
 function handleSignOut() {
     window.location.replace("./log-in")
-    // Sign-out successful.
 }
-
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        var uid = user.uid
-        console.log(uid, user)
-    } else {
-        console.log("not logged in!")
-    }
-})
-if (logoutButton) {
-    logoutButton.addEventListener("click", handleSignOut)
+const checkAuthorisation = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+            window.location.replace("./log-in")
+        }
+    })
 }
