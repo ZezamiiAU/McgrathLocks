@@ -26,6 +26,6 @@ function handleSignOut() {
     window.location.replace("./log-in")
     // Sign-out successful.
 }
-if (typeof logoutButton !== null) {
+if (logoutButton) {
     logoutButton.addEventListener("click", handleSignOut)
 }
