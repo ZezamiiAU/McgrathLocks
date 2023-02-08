@@ -1,6 +1,6 @@
 // Login Function
 var loginButton = document.getElementById("loginButton")
-
+console.log(loginButton)
 loginButton.addEventListener("click", function (e) {
     console.log("button clicked!")
     e.preventDefault()
