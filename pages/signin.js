@@ -1,5 +1,5 @@
 // Login Function
-const loginButton = document.getElementById("loginButton")
+const loginButton = document.getElementById("loginButton2")
 console.log(loginButton)
 loginButton.addEventListener("click", function (e) {
     console.log("button clicked!")
