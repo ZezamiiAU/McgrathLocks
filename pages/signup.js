@@ -32,25 +32,6 @@ async function signup(event) {
         firestoreUserError: null
     }
 
-    // Check if email already exists
-    // const emailCheck = await firebase
-    //     .auth()
-    //     .fetchSignInMethodsForEmail(email)
-    //     .then((methods) => {
-    //         if (methods.length > 0) {
-    //             return false
-    //         }
-    //         return true
-    //     })
-    //     .catch((error) => {
-    //         console.error(error)
-    //     })
-
-    // if (!emailCheck) {
-    //     errorMessage.innerHTML = "Email address already exists."
-    //     return
-    // }
-
     // Create a user under Authentication.
     await firebase
         .auth()
