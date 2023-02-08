@@ -23,6 +23,7 @@ function authenticate() {
         .auth()
         .signInWithEmailAndPassword(emailInput, passwordInput)
         .then(function ({ user }) {
+            console.log(user)
             if (user) {
                 user.getIdToken().then((t) => {
                     console.log("token: ", t)
