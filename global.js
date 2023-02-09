@@ -26,6 +26,7 @@ async function handleSignOut() {
 }
 const checkAuthorisation = () => {
     firebase.auth().onAuthStateChanged((user) => {
+        console.log(user)
         if (user) {
             window.location.replace("./integration")
         } else {
