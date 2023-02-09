@@ -1,50 +1,55 @@
-//Save Button  variables
+// RMS Save Button  variables
 const enterCredentialsRMS = document.getElementById("rmsCloudButton")
-const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
-enterCredentialsRMS.addEventListener("click", save)
-enterCredentialsRMS.addEventListener("click", save)
+enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
 
-//Error Message Variables
-const rmsErrorMessage = document.getElementById("rmsErrorMessage")
-const ttlockErrorMessage = document.getElementById("ttlockErrorMessage")
+const credentialRMSSetup = () => {
+    const rmsErrorMessage = document.getElementById("rmsErrorMessage")
+    //RMS Cloud Credntials Variables
+    const clientNumberRMS = document.getElementById("clientNumber")
+    const clientPasswordRMS = document.getElementById("clientPassword")
 
-//RMS Cloud Credntials Variables
-const clientNumberRMS = document.getElementById("clientNumber")
-const clientPasswordRMS = document.getElementById("clientPassword")
+    if (!clientNumberRMS || !clientPasswordRMS) {
+        rmsErrorMessage.innerHTML = "Please enter all required fields."
+        return
+    } else if (!/^\d+$/.test(clientNumberRMS)) {
+        errorMessage.innerHTML = "RMS Client Number should only contain numbers."
+        return
+    }
 
-//TTLock Credentials Variables
-const ttlockUser = document.getElementById("ttlockUser")
-const ttlockPassword = document.getElementById("ttlockPassword")
-const ttlockClientID = document.getElementById("ttlockClientID")
-const ttlockSecretKey = document.getElementById("ttlockSecretKey")
-
-if (!clientNumberRMS || !clientPasswordRMS) {
-    rmsErrorMessage.innerHTML = "Please enter all required fields."
-    return
-} else if (!/^\d+$/.test(clientNumberRMS)) {
-    errorMessage.innerHTML = "RMS Client Number should only contain numbers."
-    return
-}
-
-if (!ttlockUser || !ttlockPassword || !ttlockClientID || !ttlockSecretKey) {
-    ttlockErrorMessage.innerHTML = "Please enter all required fields."
-    return
-}
-
-if (user.uid) {
     const obj = {
-        displayName: displayName,
-        company: company,
-        phone: phone,
-        userID: user.uid
+        "rms.clientID": clientNumberRMS,
+        "rms.clientPassword": clientPasswordRMS,
+        "rms.isWebhookSetupComplete": false
     }
 
     db.collection("users")
-        .doc(user.uid)
-        .set(obj)
+        .doc(user.id)
+        .update(obj)
         .catch((e) => {
-            errorManager.firestoreUserError = e
+            rmsErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
-} else {
-    errorManager.signinUserError = user
+    rmsErrorMessage.styler.color = "green"
+    rmsErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
+}
+
+//TTLock Save Button Variables
+const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
+enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
+
+const credentialTTLockSetup = () => {
+    //Error Message Variables
+
+    const ttlockErrorMessage = document.getElementById("ttlockErrorMessage")
+
+    //TTLock Credentials Variables
+    const ttlockUser = document.getElementById("ttlockUser")
+    const ttlockPassword = document.getElementById("ttlockPassword")
+    const ttlockClientID = document.getElementById("ttlockClientID")
+    const ttlockSecretKey = document.getElementById("ttlockSecretKey")
+    const obj = {
+        "ttlock.clientID": ttlockClientID,
+        "ttlock.clientSecret": ttlockSecretKey,
+        "ttlock.password": ttlockPassword,
+        "ttlock.username": ttlockUser
+    }
 }
