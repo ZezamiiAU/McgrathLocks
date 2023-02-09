@@ -31,6 +31,14 @@ const checkAuthorisation = () => {
     })
 }
 
+const checkLoggedIn = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            window.location.replace("./integration")
+        }
+    })
+}
+
 const getCurrentUser = async () => {
     let user
     await firebase.auth().onAuthStateChanged((u) => {
