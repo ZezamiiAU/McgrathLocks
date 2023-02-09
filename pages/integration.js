@@ -5,9 +5,11 @@ const credentialRMSSetup = async () => {
     const clientPasswordRMS = document.getElementById("clientPassword").value
 
     if (!clientNumberRMS || !clientPasswordRMS) {
+        rmsErrorMessage.style.color = "red"
         rmsErrorMessage.innerHTML = "Please enter all required fields."
         return
     } else if (!/^\d+$/.test(clientNumberRMS)) {
+        rmsErrorMessage.style.color = "red"
         rmsErrorMessage.innerHTML = "RMS Client Number should only contain numbers."
         return
     }
@@ -45,6 +47,7 @@ const credentialTTLockSetup = async () => {
     const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
 
     if (!ttlockUser || !ttlockPassword || !ttlockClientID || !ttlockSecretKey) {
+        ttlockErrorMessage.style.color = "red"
         ttlockErrorMessage.innerHTML = "Please enter all required fields."
         return
     }
