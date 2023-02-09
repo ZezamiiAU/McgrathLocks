@@ -8,6 +8,7 @@ const credentialRMSSetup = () => {
         rmsErrorMessage.innerHTML = "Please enter all required fields."
         return
     } else if (!/^\d+$/.test(clientNumberRMS)) {
+        console.log(clientNumberRMS)
         rmsErrorMessage.innerHTML = "RMS Client Number should only contain numbers."
         return
     }
