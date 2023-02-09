@@ -93,6 +93,3 @@ const initialSetup = async () => {
         .then((result) => console.log("res", result))
         .catch((error) => console.log("error", error))
 }
-const myTimeout = setTimeout(() => {
-    initialSetup()
-}, 10000)
