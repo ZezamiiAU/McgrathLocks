@@ -13,10 +13,7 @@ const credentialRMSSetup = async () => {
         return
     }
 
-    const user = getCurrentUser().then((s) => {
-        console.log(s, "xxx")
-    })
-    console.log(user)
+    const user = await getCurrentUser()
     const obj = {
         "rms.clientID": clientNumberRMS,
         "rms.clientPassword": clientPasswordRMS,
@@ -24,9 +21,9 @@ const credentialRMSSetup = async () => {
     }
 
     db.collection("users")
-        .doc(user.user.id)
+        .doc(user.uid)
         .update(obj)
-        .catch((e) => {
+        .catch(() => {
             rmsErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
     rmsErrorMessage.styler.color = "green"
