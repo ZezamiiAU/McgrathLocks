@@ -13,7 +13,9 @@ const credentialRMSSetup = async () => {
         return
     }
 
-    const user = await getCurrentUser()
+    const user = getCurrentUser().then((s) => {
+        console.log(s, "xxx")
+    })
     console.log(user)
     const obj = {
         "rms.clientID": clientNumberRMS,
