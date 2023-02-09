@@ -13,6 +13,8 @@ const credentialRMSSetup = () => {
         return
     }
 
+    const user = firebase.auth().onAuthStateChanged((user) => user)
+    console.log(user)
     const obj = {
         "rms.clientID": clientNumberRMS,
         "rms.clientPassword": clientPasswordRMS,
@@ -20,7 +22,7 @@ const credentialRMSSetup = () => {
     }
 
     db.collection("users")
-        .doc(user.id)
+        .doc(user.user.id)
         .update(obj)
         .catch((e) => {
             rmsErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
