@@ -32,5 +32,9 @@ const checkAuthorisation = () => {
 }
 
 const getCurrentUser = async () => {
-    return await firebase.auth().onAuthStateChanged((user) => user)
+    let user
+    await firebase.auth().onAuthStateChanged((u) => {
+        user = u
+    })
+    return user
 }
