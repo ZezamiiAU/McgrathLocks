@@ -8,7 +8,6 @@ const credentialRMSSetup = async () => {
         rmsErrorMessage.innerHTML = "Please enter all required fields."
         return
     } else if (!/^\d+$/.test(clientNumberRMS)) {
-        console.log(clientNumberRMS)
         rmsErrorMessage.innerHTML = "RMS Client Number should only contain numbers."
         return
     }
@@ -26,17 +25,13 @@ const credentialRMSSetup = async () => {
         .catch(() => {
             rmsErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
-    rmsErrorMessage.styler.color = "green"
+    rmsErrorMessage.style.color = "green"
     rmsErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
 }
 
 // RMS Save Button  variables
 const enterCredentialsRMS = document.getElementById("rmsCloudButton")
 enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
-
-//TTLock Save Button Variables
-const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
-enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
 
 const credentialTTLockSetup = async () => {
     //Error Message Variables
@@ -64,3 +59,7 @@ const credentialTTLockSetup = async () => {
     ttlockErrorMessage.styler.color = "green"
     ttlockErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
 }
+
+//TTLock Save Button Variables
+const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
+enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
