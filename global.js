@@ -21,6 +21,7 @@ const db = firebase.firestore()
 // Finalising the global config.
 
 function handleSignOut() {
+    firebase.auth().signOut()
     window.location.replace("./log-in")
 }
 const checkAuthorisation = () => {

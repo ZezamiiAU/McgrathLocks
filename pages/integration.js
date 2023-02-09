@@ -73,3 +73,9 @@ const credentialTTLockSetup = async () => {
 //TTLock Save Button Variables
 const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
 enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
+
+const logout = async () => {
+    const logoutButton = document.getElementById("logoutButton")
+    logoutButton.addEventListener("click", credentialTTLockSetup)
+    handleSignOut()
+}
