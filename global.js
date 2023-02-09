@@ -25,15 +25,19 @@ async function handleSignOut() {
     //window.location.replace("./log-in")
 }
 const checkAuthorisation = () => {
+    const allowedLocations = ["log", "sign"]
     firebase.auth().onAuthStateChanged((user) => {
         console.log(user)
-        if (user && !windows.location.pathname.includes("integration")) {
+        if (user && !window.location.pathname.includes("integration")) {
             window.location.replace("./integration")
-        } else if (!user && !windows.location.pathname.includes("log")) {
-            window.location.replace("./log-in")
+        } else if (!user) {
+            if (!allowedLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
+                window.location.replace("./log-in")
+            }
         }
     })
 }
+checkAuthorisation()
 
 const getCurrentUser = async () => {
     let user
