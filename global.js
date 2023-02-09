@@ -25,8 +25,8 @@ async function handleSignOut() {
     //window.location.replace("./log-in")
 }
 const checkAuthorisation = () => {
-    const unauthLocations = ["log", "sign", "/"]
-    const authLocations = ["integration", "Dashboard", "/"]
+    const unauthLocations = ["log", "sign"]
+    const authLocations = ["integration", "Dashboard"]
     firebase.auth().onAuthStateChanged((user) => {
         console.log(user, window.location.pathname)
         if (user) {
