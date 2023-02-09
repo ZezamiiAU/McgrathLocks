@@ -93,3 +93,4 @@ const initialSetup = async () => {
         .then((result) => console.log("res", result))
         .catch((error) => console.log("error", error))
 }
+initialSetup()
