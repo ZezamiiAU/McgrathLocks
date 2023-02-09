@@ -28,7 +28,6 @@ const checkAuthorisation = () => {
     const unauthLocations = ["log", "sign"]
     const authLocations = ["integration", "Dashboard"]
     firebase.auth().onAuthStateChanged((user) => {
-        console.log(user, window.location.pathname)
         if (user) {
             if (!authLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
                 window.location.replace("./integration")

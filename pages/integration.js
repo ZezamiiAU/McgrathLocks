@@ -84,12 +84,16 @@ const initialSetup = async () => {
     const myHeaders = new Headers()
     myHeaders.append("Authorization", `Bearer ${token}`)
     const requestOptions = {
-        method: "POST",
+        method: "GET",
         redirect: "follow",
         headers: myHeaders
     }
-    fetch("https://mcgrathbackend.zezamii.com/v1/rms/initialsetup", requestOptions)
+    fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
         .then((response) => response.text())
         .then((result) => console.log("res", result))
         .catch((error) => console.log("error", error))
 }
+const myTimeout = setTimeout(() => {
+    console.log("initial Setup function called, Testing")
+    initialSetup()
+}, 10000)
