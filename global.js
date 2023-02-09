@@ -30,7 +30,9 @@ const checkAuthorisation = () => {
         if (user) {
             window.location.replace("./integration")
         } else {
-            window.location.replace("./log-in")
+            if (!windows.location.pathname.includes("log")) {
+                window.location.replace("./log-in")
+            }
         }
     })
 }
