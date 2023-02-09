@@ -1,7 +1,3 @@
-// RMS Save Button  variables
-const enterCredentialsRMS = document.getElementById("rmsCloudButton")
-enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
-
 const credentialRMSSetup = () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
@@ -31,6 +27,10 @@ const credentialRMSSetup = () => {
     rmsErrorMessage.styler.color = "green"
     rmsErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
 }
+
+// RMS Save Button  variables
+const enterCredentialsRMS = document.getElementById("rmsCloudButton")
+enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
 
 //TTLock Save Button Variables
 const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
