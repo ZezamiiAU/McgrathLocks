@@ -22,7 +22,7 @@ const db = firebase.firestore()
 
 async function handleSignOut() {
     await firebase.auth().signOut()
-    window.location.replace("./log-in")
+    //window.location.replace("./log-in")
 }
 const checkAuthorisation = () => {
     firebase.auth().onAuthStateChanged((user) => {
