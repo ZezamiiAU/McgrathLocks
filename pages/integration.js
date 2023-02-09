@@ -77,3 +77,19 @@ enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
 //signout
 const logoutButton = document.getElementById("logoutButton")
 logoutButton.addEventListener("click", handleSignOut)
+
+const initialSetup = async () => {
+    const { user } = await getCurrentUser()
+    const token = user.getIdToken().then((t) => t)
+    const myHeaders = new Headers()
+    myHeaders.append("Authorization", `Bearer ${token}`)
+    const requestOptions = {
+        method: "POST",
+        redirect: "follow",
+        headers: myHeaders
+    }
+    fetch("https://mcgrathbackend.zezamii.com/v1/rms/initialsetup", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log("res", result))
+        .catch((error) => console.log("error", error))
+}
