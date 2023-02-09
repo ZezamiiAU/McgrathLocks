@@ -44,6 +44,11 @@ const credentialTTLockSetup = async () => {
     const ttlockClientID = document.getElementById("ttlockClientID").value
     const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
 
+    if (!ttlockUser || !ttlockPassword || !ttlockClientID || !ttlockSecretKey) {
+        ttlockErrorMessage.innerHTML = "Please enter all required fields."
+        return
+    }
+
     const users = await getCurrentUser()
     const object = {
         "ttlock.clientID": ttlockClientID,
@@ -59,7 +64,7 @@ const credentialTTLockSetup = async () => {
             ttlockErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
     ttlockErrorMessage.style.color = "green"
-    ttlockErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
+    ttlockErrorMessage.innerHTML = "TTLock Details Successfully Saved!"
 }
 
 //TTLock Save Button Variables
