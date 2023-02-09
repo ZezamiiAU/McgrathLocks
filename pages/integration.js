@@ -1,8 +1,8 @@
 const credentialRMSSetup = () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
-    const clientNumberRMS = document.getElementById("clientNumber")
-    const clientPasswordRMS = document.getElementById("clientPassword")
+    const clientNumberRMS = document.getElementById("clientNumber").value
+    const clientPasswordRMS = document.getElementById("clientPassword").value
 
     if (!clientNumberRMS || !clientPasswordRMS) {
         rmsErrorMessage.innerHTML = "Please enter all required fields."
@@ -43,10 +43,10 @@ const credentialTTLockSetup = () => {
     const ttlockErrorMessage = document.getElementById("ttlockErrorMessage")
 
     //TTLock Credentials Variables
-    const ttlockUser = document.getElementById("ttlockUser")
-    const ttlockPassword = document.getElementById("ttlockPassword")
-    const ttlockClientID = document.getElementById("ttlockClientID")
-    const ttlockSecretKey = document.getElementById("ttlockSecretKey")
+    const ttlockUser = document.getElementById("ttlockUser").value
+    const ttlockPassword = document.getElementById("ttlockPassword").value
+    const ttlockClientID = document.getElementById("ttlockClientID").value
+    const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
     const obj = {
         "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey,
