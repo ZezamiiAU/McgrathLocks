@@ -74,8 +74,6 @@ const credentialTTLockSetup = async () => {
 const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
 enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
 
-const logout = async () => {
-    const logoutButton = document.getElementById("logoutButton")
-    logoutButton.addEventListener("click", credentialTTLockSetup)
-    handleSignOut()
-}
+//signout
+const logoutButton = document.getElementById("logoutButton")
+logoutButton.addEventListener("click", handleSignOut)

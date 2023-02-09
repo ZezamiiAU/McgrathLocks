@@ -20,22 +20,16 @@ const db = firebase.firestore()
 
 // Finalising the global config.
 
-function handleSignOut() {
-    firebase.auth().signOut()
+async function handleSignOut() {
+    await firebase.auth().signOut()
     window.location.replace("./log-in")
 }
 const checkAuthorisation = () => {
     firebase.auth().onAuthStateChanged((user) => {
-        if (!user) {
-            window.location.replace("./log-in")
-        }
-    })
-}
-
-const checkLoggedIn = () => {
-    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             window.location.replace("./integration")
+        } else {
+            window.location.replace("./log-in")
         }
     })
 }
