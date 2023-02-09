@@ -38,7 +38,7 @@ enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
 const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
 enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
 
-const credentialTTLockSetup = () => {
+const credentialTTLockSetup = async () => {
     //Error Message Variables
 
     const ttlockErrorMessage = document.getElementById("ttlockErrorMessage")
@@ -48,10 +48,19 @@ const credentialTTLockSetup = () => {
     const ttlockPassword = document.getElementById("ttlockPassword").value
     const ttlockClientID = document.getElementById("ttlockClientID").value
     const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
-    const obj = {
+    const object = {
         "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey,
         "ttlock.password": ttlockPassword,
         "ttlock.username": ttlockUser
     }
+
+    db.collection("users")
+        .doc(user.uid)
+        .update(object)
+        .catch(() => {
+            ttlockErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
+        })
+    ttlockErrorMessage.styler.color = "green"
+    ttlockErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
 }
