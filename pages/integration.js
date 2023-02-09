@@ -1,4 +1,4 @@
-const credentialRMSSetup = () => {
+const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
     const clientNumberRMS = document.getElementById("clientNumber").value
@@ -13,7 +13,7 @@ const credentialRMSSetup = () => {
         return
     }
 
-    const user = firebase.auth().onAuthStateChanged((user) => user)
+    const user = await getCurrentUser()
     console.log(user)
     const obj = {
         "rms.clientID": clientNumberRMS,
