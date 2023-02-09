@@ -41,7 +41,7 @@ async function signup(event) {
         })
 
     // If no error then create the user under firestore.
-    if (errorManager.createUserError !== null) {
+    if (errorManager.createUserError === null) {
         // Login the newly created user.
         const user = await firebase
             .auth()
