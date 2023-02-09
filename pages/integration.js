@@ -43,6 +43,8 @@ const credentialTTLockSetup = async () => {
     const ttlockPassword = document.getElementById("ttlockPassword").value
     const ttlockClientID = document.getElementById("ttlockClientID").value
     const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
+
+    const users = await getCurrentUser()
     const object = {
         "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey,
@@ -51,12 +53,12 @@ const credentialTTLockSetup = async () => {
     }
 
     db.collection("users")
-        .doc(user.uid)
+        .doc(users.uid)
         .update(object)
         .catch(() => {
             ttlockErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
-    ttlockErrorMessage.styler.color = "green"
+    ttlockErrorMessage.style.color = "green"
     ttlockErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
 }
 
