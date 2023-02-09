@@ -79,7 +79,7 @@ const logoutButton = document.getElementById("logoutButton")
 logoutButton.addEventListener("click", handleSignOut)
 
 const initialSetup = async () => {
-    const { user } = await getCurrentUser()
+    const user = await getCurrentUser()
     const token = user.getIdToken().then((t) => t)
     const myHeaders = new Headers()
     myHeaders.append("Authorization", `Bearer ${token}`)
