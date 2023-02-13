@@ -53,6 +53,7 @@ async function signup(event) {
         if (user.uid) {
             const obj = {
                 displayName: displayName,
+                email: email,
                 company: company,
                 phone: phone,
                 userID: user.uid // set the userID field to the uid of the user
