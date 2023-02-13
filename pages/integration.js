@@ -83,18 +83,18 @@ const initialSetup = async () => {
     const token = user.getIdToken().then((t) => t)
     const myHeaders = new Headers()
     myHeaders.append("Authorization", `Bearer ${token}`)
-    // const requestOptions = {
-    //     method: "GET",
-    //     redirect: "follow",
-    //     headers: myHeaders
-    // }
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders
+    }
 
-    //     fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
-    //         .then((response) => response.text())
-    //         .then((result) => console.log("res", result))
-    //         .catch((error) => console.log("error", error))
+    fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log("res", result))
+        .catch((error) => console.log("error", error))
 }
-// const myTimeout = setTimeout(() => {
-//     console.log("initial Setup function called, Testing")
-//     initialSetup()
-// }, 10000)
+const myTimeout = setTimeout(() => {
+    console.log("initial Setup function called, Testing")
+    initialSetup()
+}, 10000)
