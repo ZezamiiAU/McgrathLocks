@@ -41,40 +41,42 @@ async function signup(event) {
         })
 
     // If no error then create the user under firestore.
-    // Login the newly created user.
-    const user = await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(async (u) => u.user)
-        .catch((e) => e)
+    if (errorManager.createUserError === null) {
+        // Login the newly created user.
+        const user = await firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(async (u) => u.user)
+            .catch((e) => e)
 
-    // set the user in firestore
-    if (user.uid) {
-        const obj = {
-            displayName: displayName,
-            email: email,
-            company: company,
-            phone: phone,
-            userID: user.uid // set the userID field to the uid of the user
+        // set the user in firestore
+        if (user.uid) {
+            const obj = {
+                displayName: displayName,
+                email: email,
+                company: company,
+                phone: phone,
+                userID: user.uid // set the userID field to the uid of the user
+            }
+
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .set(obj)
+                .catch((e) => {
+                    errorManager.firestoreUserError = e
+                })
+        } else {
+            errorManager.signinUserError = user
         }
-
-        await db
-            .collection("users")
-            .doc(user.uid)
-            .set(obj)
-            .catch((e) => {
-                errorManager.firestoreUserError = e
-            })
-    } else {
-        errorManager.signinUserError = user
     }
-}
 
-// Check if there was any error
-if (errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError) {
-    errorMessage.innerHTML =
-        errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError
-    return
-}
+    // Check if there was any error
+    if (errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError) {
+        errorMessage.innerHTML =
+            errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError
+        return
+    }
 
-window.location.replace("./integration")
+    window.location.replace("./integration")
+}
