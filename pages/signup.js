@@ -49,6 +49,8 @@ async function signup(event) {
             .then(async (u) => u.user)
             .catch((e) => e)
 
+        console.log(user)
+
         // set the user in firestore
         if (user.uid) {
             const obj = {
@@ -76,5 +78,5 @@ async function signup(event) {
         return
     }
 
-    window.location.replace("./integration")
+    // window.location.replace("./integration")
 }
