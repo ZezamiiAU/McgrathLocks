@@ -40,6 +40,8 @@ async function signup(event) {
             errorManager.createUserError = error
         })
 
+    console.log(firebase)
+
     // If no error then create the user under firestore.
     if (errorManager.createUserError === null) {
         // Login the newly created user.
