@@ -40,27 +40,6 @@ async function signup(event) {
             errorManager.createUserError = error
         })
 
-    // set the user in firestore
-    if (user.uid) {
-        const obj = {
-            displayName: displayName,
-            email: email,
-            company: company,
-            phone: phone,
-            userID: user.uid // set the userID field to the uid of the user
-        }
-
-        await db
-            .collection("users")
-            .doc(user.uid)
-            .set(obj)
-            .catch((e) => {
-                errorManager.firestoreUserError = e
-            })
-    } else {
-        errorManager.signinUserError = user
-    }
-
     // If no error then create the user under firestore.
     if (errorManager.createUserError === null) {
         // Login the newly created user.
@@ -69,6 +48,27 @@ async function signup(event) {
             .signInWithEmailAndPassword(email, password)
             .then(async (u) => u.user)
             .catch((e) => e)
+
+        // set the user in firestore
+        if (user.uid) {
+            const obj = {
+                displayName: displayName,
+                email: email,
+                company: company,
+                phone: phone,
+                userID: user.uid // set the userID field to the uid of the user
+            }
+
+            await db
+                .collection("users")
+                .doc(user.uid)
+                .set(obj)
+                .catch((e) => {
+                    errorManager.firestoreUserError = e
+                })
+        } else {
+            errorManager.signinUserError = user
+        }
     }
 
     // Check if there was any error
