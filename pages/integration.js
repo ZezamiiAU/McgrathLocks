@@ -1,82 +1,100 @@
-const signupButton = document.getElementById("signupButton")
-const errorMessage = document.getElementById("signupErrorMessage")
-signupButton.addEventListener("click", signup)
+const credentialRMSSetup = async () => {
+    const rmsErrorMessage = document.getElementById("rmsErrorMessage")
+    //RMS Cloud Credntials Variables
+    const clientNumberRMS = document.getElementById("clientNumber").value
+    const clientPasswordRMS = document.getElementById("clientPassword").value
 
-async function signup(event) {
-    event.preventDefault()
-    event.stopPropagation()
-    const email = document.getElementById("signupEmail").value
-    const displayName = document.getElementById("signupName").value
-    const company = document.getElementById("signupCompany").value
-    const phone = document.getElementById("signupPhone").value
-    const password = document.getElementById("signupPassword").value
-
-    // Validate input fields
-    if (!displayName || !company || !email || !phone || !password) {
-        errorMessage.innerHTML = "Please enter all required fields."
+    if (!clientNumberRMS || !clientPasswordRMS) {
+        rmsErrorMessage.style.color = "red"
+        rmsErrorMessage.innerHTML = "Please enter all required fields."
         return
-    } else if (!/^\d+$/.test(phone)) {
-        errorMessage.innerHTML = "Phone number should only contain numbers."
-        return
-    } else if (!password || password.length < 8 || password.length > 15) {
-        errorMessage.innerHTML = "Password should be between 8 to 15 characters long."
-        return
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/.test(password)) {
-        errorMessage.innerHTML = "Password should contain at least 1 letter, 1 number, and 1 special character."
+    } else if (!/^\d+$/.test(clientNumberRMS)) {
+        rmsErrorMessage.style.color = "red"
+        rmsErrorMessage.innerHTML = "RMS Client Number should only contain numbers."
         return
     }
 
-    const errorManager = {
-        createUserError: null,
-        signinUserError: null,
-        firestoreUserError: null
+    const user = await getCurrentUser()
+    const obj = {
+        "rms.clientID": clientNumberRMS,
+        "rms.clientPassword": clientPasswordRMS,
+        "rms.isWebhookSetupComplete": false
     }
 
-    // Create a user under Authentication.
-    await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .catch((error) => {
-            errorManager.createUserError = error
+    db.collection("users")
+        .doc(user.uid)
+        .update(obj)
+        .catch(() => {
+            rmsErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
         })
+    rmsErrorMessage.style.color = "green"
+    rmsErrorMessage.innerHTML = "RMS Cloud Successfully Saved!"
+}
 
-    // If no error then create the user under firestore.
-    if (errorManager.createUserError === null) {
-        // Login the newly created user.
-        const user = await firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(async (u) => u.user)
-            .catch((e) => e)
+// RMS Save Button  variables
+const enterCredentialsRMS = document.getElementById("rmsCloudButton")
+enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
 
-        // set the user in firestore
-        if (user.uid) {
-            const obj = {
-                displayName: displayName,
-                email: email,
-                company: company,
-                phone: phone,
-                userID: user.uid // set the userID field to the uid of the user
-            }
+const credentialTTLockSetup = async () => {
+    //Error Message Variables
 
-            await db
-                .collection("users")
-                .doc(user.uid)
-                .set(obj)
-                .catch((e) => {
-                    errorManager.firestoreUserError = e
-                })
-        } else {
-            errorManager.signinUserError = user
-        }
-    }
+    const ttlockErrorMessage = document.getElementById("ttlockErrorMessage")
 
-    // Check if there was any error
-    if (errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError) {
-        errorMessage.innerHTML =
-            errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError
+    //TTLock Credentials Variables
+    const ttlockUser = document.getElementById("ttlockUser").value
+    const ttlockPassword = document.getElementById("ttlockPassword").value
+    const ttlockClientID = document.getElementById("ttlockClientID").value
+    const ttlockSecretKey = document.getElementById("ttlockSecretKey").value
+
+    if (!ttlockUser || !ttlockPassword || !ttlockClientID || !ttlockSecretKey) {
+        ttlockErrorMessage.style.color = "red"
+        ttlockErrorMessage.innerHTML = "Please enter all required fields."
         return
     }
 
-    window.location.replace("./integration")
+    const users = await getCurrentUser()
+    const object = {
+        "ttlock.clientID": ttlockClientID,
+        "ttlock.clientSecret": ttlockSecretKey,
+        "ttlock.password": ttlockPassword,
+        "ttlock.username": ttlockUser
+    }
+
+    db.collection("users")
+        .doc(users.uid)
+        .update(object)
+        .catch(() => {
+            ttlockErrorMessage.innerHTML = "Something Went Wrong, Please Try Again"
+        })
+    ttlockErrorMessage.style.color = "green"
+    ttlockErrorMessage.innerHTML = "TTLock Details Successfully Saved!"
 }
+
+//TTLock Save Button Variables
+const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
+enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
+
+//signout
+const logoutButton = document.getElementById("logoutButton")
+logoutButton.addEventListener("click", handleSignOut)
+
+// const initialSetup = async () => {
+//     const user = await getCurrentUser()
+//     const token = user.getIdToken().then((t) => t)
+//     const myHeaders = new Headers()
+//     myHeaders.append("Authorization", `Bearer ${token}`)
+//     const requestOptions = {
+//         method: "GET",
+//         redirect: "follow",
+//         headers: myHeaders
+//     }
+
+//     fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
+//         .then((response) => response.text())
+//         .then((result) => console.log("res", result))
+//         .catch((error) => console.log("error", error))
+// }
+// const myTimeout = setTimeout(() => {
+//     console.log("initial Setup function called, Testing")
+//     initialSetup()
+// }, 10000)
