@@ -1,7 +1,3 @@
-const signupButton = document.getElementById("signupButton")
-const errorMessage = document.getElementById("signupErrorMessage")
-signupButton.addEventListener("click", signup)
-
 async function signup(event) {
     event.preventDefault()
     event.stopPropagation()
@@ -52,7 +48,7 @@ async function signup(event) {
             .catch((e) => e)
 
         // set the user in firestore
-        if (user.uid) {
+        if (user && user.uid) {
             const obj = {
                 displayName: displayName,
                 email: email,
