@@ -88,11 +88,12 @@ const initialSetup = async () => {
         redirect: "follow",
         headers: myHeaders
     }
-//     fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
-//         .then((response) => response.text())
-//         .then((result) => console.log("res", result))
-//         .catch((error) => console.log("error", error))
-// }
+
+    //     fetch("https://mcgrathbackend.zezamii.com/v1/ttlock/locks", requestOptions)
+    //         .then((response) => response.text())
+    //         .then((result) => console.log("res", result))
+    //         .catch((error) => console.log("error", error))
+}
 // const myTimeout = setTimeout(() => {
 //     console.log("initial Setup function called, Testing")
 //     initialSetup()
