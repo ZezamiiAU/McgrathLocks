@@ -52,7 +52,7 @@ async function signup(event) {
             .catch((e) => e)
 
         // set the user in firestore
-        if (user && user.uid) {
+        if (user.uid) {
             const obj = {
                 displayName: displayName,
                 email: email,
