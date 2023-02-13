@@ -49,18 +49,17 @@ async function signup(event) {
             .then(async (u) => u.user)
             .catch((e) => e)
 
-        console.log(user)
-
         // set the user in firestore
         if (user.uid) {
             const obj = {
                 displayName: displayName,
                 company: company,
                 phone: phone,
-                userID: user.uid
+                userID: user.uid // set the userID field to the uid of the user
             }
 
-            db.collection("users")
+            await db
+                .collection("users")
                 .doc(user.uid)
                 .set(obj)
                 .catch((e) => {
