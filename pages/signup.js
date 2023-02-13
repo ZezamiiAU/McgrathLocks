@@ -1,6 +1,6 @@
 const signupButton = document.getElementById("signupButton")
 const errorMessage = document.getElementById("signupErrorMessage")
-signupButton.addEventListener("click", signup)
+// signupButton.addEventListener("click", signup)
 
 async function signup(event) {
     event.preventDefault()
@@ -59,8 +59,6 @@ async function signup(event) {
                 userID: user.uid // set the userID field to the uid of the user
             }
 
-            console.log(obj)
-
             await db
                 .collection("users")
                 .doc(user.uid)
@@ -80,5 +78,5 @@ async function signup(event) {
         return
     }
 
-    window.location.replace("./integration")
+    // window.location.replace("./integration")
 }
