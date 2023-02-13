@@ -1,6 +1,6 @@
 const signupButton = document.getElementById("signupButton")
 const errorMessage = document.getElementById("signupErrorMessage")
-// signupButton.addEventListener("click", signup)
+signupButton.addEventListener("click", signup)
 
 async function signup(event) {
     event.preventDefault()
