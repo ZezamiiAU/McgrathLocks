@@ -40,11 +40,8 @@ async function signup(event) {
             errorManager.createUserError = error
         })
 
-    console.log(errorManager)
-
     // If no error then create the user under firestore.
     if (errorManager.createUserError === null) {
-        console.log("running")
         // Login the newly created user.
         const user = await getCurrentUser()
 
@@ -54,7 +51,6 @@ async function signup(event) {
         //     .then(async (u) => u.user)
         //     .catch((e) => e)
 
-        console.log(user)
         // set the user in firestore
         if (user.uid) {
             const obj = {
@@ -64,7 +60,7 @@ async function signup(event) {
                 phone: phone,
                 userID: user.uid // set the userID field to the uid of the user
             }
-            console.log("anything")
+
             await db
                 .collection("users")
                 .doc(user.uid)
