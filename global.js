@@ -24,10 +24,10 @@ async function handleSignOut() {
     await firebase.auth().signOut()
     window.location.replace("./log-in")
 }
-const checkAuthorisation = () => {
+async function checkAuthorisation() {
     const unauthLocations = ["log", "sign"]
     const authLocations = ["integration", "Dashboard"]
-    firebase.auth().onAuthStateChanged((user) => {
+    await firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             if (!authLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
                 window.location.replace("./integration")
