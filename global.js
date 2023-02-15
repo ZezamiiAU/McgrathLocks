@@ -41,10 +41,10 @@ async function checkAuthorisation() {
 }
 checkAuthorisation()
 
-// const getCurrentUser = async () => {
-//     let user
-//     await firebase.auth().onAuthStateChanged((u) => {
-//         user = u
-//     })
-//     return user
-// }
+const getCurrentUser = async () => {
+    let user
+    await firebase.auth().onAuthStateChanged((u) => {
+        user = u
+    })
+    return user
+}

@@ -14,7 +14,7 @@ const credentialRMSSetup = async () => {
         return
     }
 
-    // const user = await getCurrentUser()
+    const user = await getCurrentUser()
     const obj = {
         "rms.clientID": clientNumberRMS,
         "rms.clientPassword": clientPasswordRMS,
@@ -52,7 +52,7 @@ const credentialTTLockSetup = async () => {
         return
     }
 
-    // const users = await getCurrentUser()
+    const users = await getCurrentUser()
     const object = {
         "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey,
@@ -79,7 +79,7 @@ const logoutButton = document.getElementById("logoutButton")
 logoutButton.addEventListener("click", handleSignOut)
 
 const initialSetup = async () => {
-    // const user = await getCurrentUser()
+    const user = await getCurrentUser()
     const token = user.getIdToken().then((t) => t)
     const myHeaders = new Headers()
     myHeaders.append("Authorization", `Bearer ${token}`)
