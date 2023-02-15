@@ -24,22 +24,22 @@ async function handleSignOut() {
     await firebase.auth().signOut()
     window.location.replace("./log-in")
 }
-async function checkAuthorisation() {
-    const unauthLocations = ["log", "sign"]
-    const authLocations = ["integration", "Dashboard"]
-    await firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            if (!authLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
-                window.location.replace("./integration")
-            }
-        } else if (!user) {
-            if (!unauthLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
-                window.location.replace("./log-in")
-            }
-        }
-    })
-}
-checkAuthorisation()
+// async function checkAuthorisation() {
+//     const unauthLocations = ["log", "sign"]
+//     const authLocations = ["integration", "Dashboard"]
+//     await firebase.auth().onAuthStateChanged((user) => {
+//         if (user) {
+//             if (!authLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
+//                 window.location.replace("./integration")
+//             }
+//         } else if (!user) {
+//             if (!unauthLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
+//                 window.location.replace("./log-in")
+//             }
+//         }
+//     })
+// }
+// checkAuthorisation()
 
 const getCurrentUser = async () => {
     let user
