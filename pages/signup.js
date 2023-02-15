@@ -51,7 +51,7 @@ async function signup(event) {
 
         // set the user in firestore
         if (user.uid) {
-            const obj = {
+            const obj = await {
                 displayName: displayName,
                 email: email,
                 company: company,
