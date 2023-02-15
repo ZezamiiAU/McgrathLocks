@@ -62,7 +62,7 @@ async function signup(event) {
                 phone: phone,
                 userID: user.uid // set the userID field to the uid of the user
             }
-
+            console.log("anything")
             await db
                 .collection("users")
                 .doc(user.uid)
