@@ -25,7 +25,7 @@ function authenticate() {
                 user.getIdToken().then((t) => {
                     console.log("token: ", t)
                 })
-                // window.location.replace("./integration")
+                window.location.replace("./integration")
             } else {
                 errorMessage.innerHTML = "Something Went Wrong, Please Try Again"
             }
