@@ -46,11 +46,13 @@ async function signup(event) {
     if (errorManager.createUserError === null) {
         console.log("running")
         // Login the newly created user.
-        const user = await firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(async (u) => u.user)
-            .catch((e) => e)
+        const user = await getCurrentUser()
+
+        // const user = await firebase
+        //     .auth()
+        //     .signInWithEmailAndPassword(email, password)
+        //     .then(async (u) => u.user)
+        //     .catch((e) => e)
 
         console.log(user)
         // set the user in firestore
