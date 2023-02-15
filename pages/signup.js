@@ -77,6 +77,5 @@ async function signup(event) {
             errorManager.createUserError || errorManager.signinUserError || errorManager.firestoreUserError
         return
     }
+    window.location.replace("./integration")
 }
-
-window.location.replace("./integration")
