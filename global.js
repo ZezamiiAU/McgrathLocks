@@ -48,7 +48,3 @@ const getCurrentUser = async () => {
     })
     return user
 }
-
-function hash() {
-    com.google.firebase.auth.hash.Md5
-}
