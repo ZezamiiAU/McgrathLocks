@@ -16,7 +16,7 @@ const credentialRMSSetup = async () => {
 
     const user = await getCurrentUser()
     const obj = {
-        "rms.clientID": clientNumberRMS,
+        "rms.clientID": Number(clientNumberRMS),
         "rms.clientPassword": clientPasswordRMS,
         "rms.isWebhookSetupComplete": false
     }
@@ -54,7 +54,7 @@ const credentialTTLockSetup = async () => {
 
     const users = await getCurrentUser()
     const object = {
-        "ttlock.clientID": Number(ttlockClientID),
+        "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey,
         "ttlock.password": ttlockPassword,
         "ttlock.username": ttlockUser
