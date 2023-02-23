@@ -16,6 +16,7 @@ const credentialRMSSetup = async () => {
 
     const user = await getCurrentUser()
     const obj = {
+        //clientID for RMS is required to be a number in Firestore database
         "rms.clientID": Number(clientNumberRMS),
         "rms.clientPassword": clientPasswordRMS,
         "rms.isWebhookSetupComplete": false
