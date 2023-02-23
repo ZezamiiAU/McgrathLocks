@@ -54,7 +54,7 @@ const credentialTTLockSetup = async () => {
 
     const users = await getCurrentUser()
     const object = {
-        "ttlock.clientID": ttlockClientID,
+        "ttlock.clientID": Number(ttlockClientID),
         "ttlock.clientSecret": ttlockSecretKey,
         "ttlock.password": ttlockPassword,
         "ttlock.username": ttlockUser
