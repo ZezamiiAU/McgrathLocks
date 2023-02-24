@@ -49,6 +49,8 @@ const getCurrentUser = async () => {
     return user
 }
 
+//md5 encryption for ttlock ClientID, ClientSecret, Password and Username
+
 /*
  * JavaScript MD5
  * https://github.com/blueimp/JavaScript-MD5
