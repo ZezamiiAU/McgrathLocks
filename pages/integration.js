@@ -1,11 +1,3 @@
-//console log ID Token for easy access
-
-if (user) {
-    user.getIdToken().then((t) => {
-        console.log("token: ", t)
-    })
-}
-
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
