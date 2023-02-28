@@ -22,7 +22,7 @@ async function signup(event) {
         errorMessage.innerHTML = "Password should be between 8 to 15 characters long."
         return
     } else if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/.test(password)) {
-        errorMessage.innerHTML = "Password should contain at least 1 letter, 1 number, and 1 special character."
+        errorMessage.innerHTML = "Password should contain at least 1 capital letter, 1 number, and 1 special character."
         return
     }
 
