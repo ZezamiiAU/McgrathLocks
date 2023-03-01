@@ -71,6 +71,14 @@ const credentialTTLockSetup = async () => {
     ttlockErrorMessage.innerHTML = "TTLock Details Successfully Saved!"
 }
 
+// const storageRef = firebase.storage().ref()
+// // 'file' comes from the Blob or File API
+// ref.put(file).then((snapshot) => {
+//     console.log("Uploaded a blob or file!")
+// })
+
+// const cloudStorage = document.getElementById("")
+
 //TTLock Save Button Variables
 const enterCredentialsTTLOCK = document.getElementById("ttlockButton")
 enterCredentialsTTLOCK.addEventListener("click", credentialTTLockSetup)
