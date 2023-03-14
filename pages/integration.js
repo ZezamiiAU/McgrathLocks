@@ -1,8 +1,8 @@
-// ;<html>
-//     <head>
-//         <script type='text/javascript' src='./md5.js'></script>
-//     </head>
-// </html>
+;<html>
+    <head>
+        <script type='text/javascript' src='McgrathLocks\node_modules\md5\md5.js'></script>
+    </head>
+</html>
 
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
