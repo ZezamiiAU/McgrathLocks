@@ -1,6 +1,6 @@
 ;<html>
     <head>
-        <script src='./md5.js'></script>
+        <script type='text/javascript' src='./md5.js'></script>
     </head>
 </html>
 
