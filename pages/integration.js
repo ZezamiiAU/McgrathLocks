@@ -1,5 +1,3 @@
-const md5 = require("McgrathLocks\node_modulesmd5md5.js")
-
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
