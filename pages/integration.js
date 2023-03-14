@@ -1,3 +1,5 @@
+//
+
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
