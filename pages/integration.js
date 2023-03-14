@@ -1,3 +1,9 @@
+;<html>
+    <head>
+        <script src='./md5.js'></script>
+    </head>
+</html>
+
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credntials Variables
