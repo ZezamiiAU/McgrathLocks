@@ -3,6 +3,7 @@
 const upLoadFileSetup = async () => {
     const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
     const uploadLockID = document.getElementById("lockIdFile")
+    console.log(uploadLockID)
     if (uploadLockID.files.length > 0) {
         // Check if a file has been selected
         const file = uploadLockID.files[0]
