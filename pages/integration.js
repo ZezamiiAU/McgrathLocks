@@ -1,7 +1,5 @@
 //
 
-const { SHA256 } = require("crypto-js")
-
 const uploadExcelToFirebaseStorage = async (file, storageRef) => {
     // Create a reference to the file in Firebase Storage
     const fileRef = storageRef.child(file.name)
@@ -108,7 +106,7 @@ const credentialTTLockSetup = async () => {
     const users = await getCurrentUser()
     const object = {
         "ttlock.username": ttlockUser,
-        "ttlock.password": SHA256(ttlockPassword),
+        "ttlock.password": md5(ttlockPassword),
         "ttlock.clientID": ttlockClientID,
         "ttlock.clientSecret": ttlockSecretKey
     }
