@@ -3,9 +3,12 @@
 const upLoadFileSetup = async () => {
     const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
     const uploadLockID = document.getElementById("lockIdFile")
-    uploadLockID.addEventListener("click", upLoadFileSetup)
-    if ((uploadLockID = true)) {
-        uploadLockID = firebase.storage().ref()
+    if (uploadLockID.files.length > 0) {
+        // Check if a file has been selected
+        const file = uploadLockID.files[0]
+        const storageRef = firebase.storage().ref().child(file.name)
+
+        await storageRef.put(file) // Upload the file to Firebase Storage
 
         uploadFileErrorMessage.style.color = "green"
         uploadFileErrorMessage.innerHTML = "File Sent Successfully"
