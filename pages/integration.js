@@ -1,15 +1,29 @@
 //
 
+const uploadExcelToFirebaseStorage = async (file, storageRef) => {
+    // Create a reference to the file in Firebase Storage
+    const fileRef = storageRef.child(file.name)
+
+    try {
+        // Upload the file to Firebase Storage
+        const snapshot = await fileRef.put(file)
+        console.log("File uploaded to Firebase Storage:", snapshot)
+    } catch (error) {
+        console.error("Error uploading file to Firebase Storage:", error)
+    }
+}
+
 const upLoadFileSetup = async () => {
     const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
     const uploadLockID = document.getElementById("lockIdFile")
     console.log(uploadLockID)
+
     if (uploadLockID.files.length > 0) {
         // Check if a file has been selected
         const file = uploadLockID.files[0]
         const storageRef = firebase.storage().ref().child(file.name)
 
-        await storageRef.put(file) // Upload the file to Firebase Storage
+        await uploadExcelToFirebaseStorage(file, storageRef) // Call the uploadExcelToFirebaseStorage function
 
         uploadFileErrorMessage.style.color = "green"
         uploadFileErrorMessage.innerHTML = "File Sent Successfully"
