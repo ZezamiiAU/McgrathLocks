@@ -8,7 +8,7 @@ const upLoadFileSetup = async () => {
         uploadLockID = firebase.storage().ref()
 
         uploadFileErrorMessage.style.color = "green"
-        uploadFileErrorMessage.innerHTML = ""
+        uploadFileErrorMessage.innerHTML = "File Sent Successfully"
     } else {
         uploadFileErrorMessage.style.color = "red"
         uploadFileErrorMessage.innerHTML = "Please Upload A File Before Continuing"
