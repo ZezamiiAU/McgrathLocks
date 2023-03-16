@@ -1,8 +1,38 @@
 //
 
+const upLoadFileSetup = async () => {
+    const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
+    const uploadLockID = document.getElementById("lockIdFile")
+    uploadLockID.addEventListener("click", upLoadFileSetup)
+    if ((uploadLockID = true)) {
+        uploadLockID = firebase.storage().ref()
+
+        uploadFileErrorMessage.style.color = "green"
+        uploadFileErrorMessage.innerHTML = ""
+    } else {
+        uploadFileErrorMessage.style.color = "red"
+        uploadFileErrorMessage.innerHTML = "Please Upload A File Before Continuing"
+    }
+}
+
+// RMS Save Button  variables
+
+// // Create a root reference
+// var storageRef = firebase.storage().ref();
+
+// // Create a reference to 'mountains.jpg'
+// var mountainsRef = storageRef.child('mountains.jpg');
+
+// // Create a reference to 'images/mountains.jpg'
+// var mountainImagesRef = storageRef.child('images/mountains.jpg');
+
+// // While the file names are the same, the references point to different files
+// mountainsRef.name === mountainImagesRef.name;           // true
+// mountainsRef.fullPath === mountainImagesRef.fullPath;   // false
+
 const credentialRMSSetup = async () => {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
-    //RMS Cloud Credntials Variables
+    //RMS Cloud Credentials Variables
     const clientNumberRMS = document.getElementById("clientNumber").value
     const clientPasswordRMS = document.getElementById("clientPassword").value
 
