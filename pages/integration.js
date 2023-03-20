@@ -1,11 +1,8 @@
 //
 
 const uploadExcelToFirebaseStorage = async (file, storageRef) => {
-    // Create a reference to the file in Firebase Storage
     const fileRef = storageRef.child(file.name)
-
     try {
-        // Upload the file to Firebase Storage
         const snapshot = await fileRef.put(file)
         console.log("File uploaded to Firebase Storage:", snapshot)
     } catch (error) {
@@ -13,17 +10,14 @@ const uploadExcelToFirebaseStorage = async (file, storageRef) => {
     }
 }
 
-const upLoadFileSetup = async () => {
+const uploadFileSetup = async () => {
     const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
     const uploadLockID = document.getElementById("lockIdFile")
-    console.log(uploadLockID)
 
     if (uploadLockID.files.length > 0) {
-        // Check if a file has been selected
         const file = uploadLockID.files[0]
         const storageRef = firebase.storage().ref().child(file.name)
-
-        await uploadExcelToFirebaseStorage(file, storageRef) // Call the uploadExcelToFirebaseStorage function
+        await uploadExcelToFirebaseStorage(file, storageRef)
 
         uploadFileErrorMessage.style.color = "green"
         uploadFileErrorMessage.innerHTML = "File Sent Successfully"
@@ -48,7 +42,7 @@ const upLoadFileSetup = async () => {
 // mountainsRef.name === mountainImagesRef.name;           // true
 // mountainsRef.fullPath === mountainImagesRef.fullPath;   // false
 
-const credentialRMSSetup = async () => {
+async function credentialRMSSetup() {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
     //RMS Cloud Credentials Variables
     const clientNumberRMS = document.getElementById("clientNumber").value
