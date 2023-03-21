@@ -1,5 +1,4 @@
-//
-
+// Firebase Storage Function to connect the application to storage
 const uploadExcelToFirebaseStorage = async (file, storageRef) => {
     const fileRef = storageRef.child(file.name)
     try {
@@ -10,6 +9,7 @@ const uploadExcelToFirebaseStorage = async (file, storageRef) => {
     }
 }
 
+// Firebase File upload and Error Messages
 const uploadFileSetup = async () => {
     const uploadFileErrorMessage = document.getElementById("uploadFileErrorMessage")
     const uploadLockID = document.getElementById("lockIdFile")
@@ -26,6 +26,8 @@ const uploadFileSetup = async () => {
         uploadFileErrorMessage.innerHTML = "Please Upload A File Before Continuing"
     }
 }
+
+//Error Messages and Upload Information to Firestore Database for RMSsetup
 
 async function credentialRMSSetup() {
     const rmsErrorMessage = document.getElementById("rmsErrorMessage")
@@ -64,6 +66,8 @@ async function credentialRMSSetup() {
 // RMS Save Button  variables
 const enterCredentialsRMS = document.getElementById("rmsCloudButton")
 enterCredentialsRMS.addEventListener("click", credentialRMSSetup)
+
+//Error Messages and Upload Information to Firestore Database for Ttlock Setup
 
 const credentialTTLockSetup = async () => {
     //Error Message Variables
