@@ -15,29 +15,37 @@ var webFlowAuth = {
 	}
 };
 // initialise firebase Auth & Firestore
-firebase.initializeApp(webFlowAuth.firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(webFlowAuth.firebaseConfig);
+} else {
+  firebase.app(); // if already initialized, use that one
+}
 const db = firebase.firestore();
 
 // Finalising the global config.
 
 async function handleSignOut() {
-	await firebase.auth().signOut();
-	window.location.replace('./log-in');
+  await firebase.auth().signOut();
+  window.location.replace("/log-in");
 }
 async function checkAuthorisation() {
-	const unauthLocations = ['log', 'sign'];
-	const authLocations = ['integration', 'Dashboard'];
-	await firebase.auth().onAuthStateChanged((user) => {
-		if (user) {
-			if (!authLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
-				window.location.replace('./integration');
-			}
-		} else if (!user) {
-			// if (!unauthLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
-			//     window.location.replace("./log-in")
-			// }
-		}
-	});
+  const unauthLocations = ["log", "sign"];
+  const authLocations = ["integration", "Dashboard"];
+  await firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      if (
+        !authLocations
+          .map((location) => window.location.pathname.includes(location))
+          .includes(true)
+      ) {
+        window.location.replace("/integration");
+      }
+    } else if (!user) {
+      // if (!unauthLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
+      //     window.location.replace("./log-in")
+      // }
+    }
+  });
 }
 checkAuthorisation();
 
