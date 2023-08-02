@@ -1,0 +1,165 @@
+<script>
+    $(document).ready(function () {
+        var buttonAdd = $("#add-option"); /*Add Button ID*/
+        var buttonRemove = $("#remove-option"); /*Remove Button ID*/
+        var className = ".dynamic-option"; /*Class on input-group or wrapper to be copied*/
+        var count = 0;
+        var field = "";
+        var maxFields = 5;
+
+        function totalFields() {
+            return $(className).length;
+        }
+
+        function addNewField() {
+            count = totalFields() + 1;
+            field = $("#dynamic-option-1").clone(); /*ID on input-group or wrapper to be copied*/
+            field.attr("id", "dynamic-option-" + count); /*Should be relative to the ID above*/
+            /*Update first field attributes*/
+            field.find("label").eq(0).attr("for", "additional-option" + count);
+            field.find("input").eq(0).attr("id", "additional-option" + count);
+            field.find("input").eq(0).attr("data-name", "additional-option" + count);
+            field.find("input").eq(0).attr("name", "additional-option" + count);
+            field.find("input").eq(0).val("");
+            /*Update second field attributes*/
+            field.find("label").eq(1).attr("for", "additional-example" + count);
+            field.find("input").eq(1).attr("id", "additional-example" + count);
+            field.find("input").eq(1).attr("data-name", "additional-example" + count);
+            field.find("input").eq(1).attr("name", "additional-example" + count);
+            field.find("input").eq(1).val("");
+            $(className + ":last").after($(field));
+        }
+
+        function removeLastField() {
+            if (totalFields() > 1) {
+                $(className + ":last").remove();
+            }
+        }
+
+        function enableButtonRemove() {
+            if (totalFields() === 2) {
+                buttonRemove.removeAttr("disabled");
+                buttonRemove.addClass("btn-remove_show");
+            }
+        }
+
+        function disableButtonRemove() {
+            if (totalFields() === 1) {
+                buttonRemove.attr("disabled", "disabled");
+                buttonRemove.removeClass("btn-remove_show");
+            }
+        }
+
+        function disableButtonAdd() {
+            if (totalFields() === maxFields) {
+                buttonAdd.attr("disabled", "disabled");
+                buttonAdd.removeClass("btn-remove_show");
+            }
+        }
+
+        function enableButtonAdd() {
+            if (totalFields() === (maxFields - 1)) {
+                buttonAdd.removeAttr("disabled");
+                buttonAdd.addClass("btn-remove_show");
+            }
+        }
+
+        buttonAdd.click(function () {
+            addNewField();
+            enableButtonRemove();
+            disableButtonAdd();
+        });
+
+        buttonRemove.click(function () {
+            removeLastField();
+            disableButtonRemove();
+            enableButtonAdd();
+        });
+    });
+
+</script>
+
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+<script>  MicroModal.init({
+        onShow: modal => console.info(`${modal.id} is shown`), // [1]    onClose: modal => console.info(`${modal.id} is hidden`), // [2]    openTrigger: 'data-custom-open', // [3]    closeTrigger: 'data-custom-close', // [4]    openClass: 'is-open', // [5]    disableScroll: true, // [6]    disableFocus: false, // [7]    awaitOpenAnimation: false, // [8]    awaitCloseAnimation: false, // [9]    debugMode: false // [10]  });</script>
+
+<style>
+    /**************************\
+    Demo Animation Style
+  \**************************/
+    @keyframes mmfadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes mmfadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes mmslideIn {
+        from {
+            transform: translateY(15%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes mmslideOut {
+        from {
+            transform: translateY(0);
+        }
+
+        to {
+            transform: translateY(-10%);
+        }
+    }
+
+    .modal-icon {
+        pointer-events: none;
+    }
+
+    .micromodal-slide {
+        display: none;
+    }
+
+    .micromodal-slide.is-open {
+        display: block;
+    }
+
+    .micromodal-slide[aria-hidden="false"] .modal__overlay {
+        animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="false"] .modal__container {
+        animation: mmslideIn 0.3s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="true"] .modal__overlay {
+        animation: mmfadeOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="true"] .modal__container {
+        animation: mmslideOut 0.3s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .micromodal-slide .modal__container,
+    .micromodal-slide .modal__overlay {
+        will-change: transform;
+    }
+</style>
+
+<script>UPLOADCARE_PUBLIC_KEY = 'b7ca1c124898f4332c7b';</script>
+<script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" data-integration="Webflow"></script>
