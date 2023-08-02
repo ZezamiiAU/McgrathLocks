@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/auth";
+firebase.initializeApp(webFlowAuth.firebaseConfig);
+const db = firebase.firestore();
 
 var webFlowAuth = {
   loginPath: "/log-in",
@@ -17,13 +17,6 @@ var webFlowAuth = {
     measurementId: "G-3JX478JX8X",
   },
 };
-// initialise firebase Auth & Firestore
-if (!firebase.apps.length) {
-  firebase.initializeApp(webFlowAuth.firebaseConfig);
-} else {
-  firebase.app(); // if already initialized, use that one
-}
-const db = firebase.firestore();
 
 // Finalising the global config.
 
