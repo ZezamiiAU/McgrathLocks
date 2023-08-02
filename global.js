@@ -22,7 +22,7 @@ var webFlowAuth = {
 
 async function handleSignOut() {
   await firebase.auth().signOut();
-  window.location.replace("/log-in");
+  window.location.replace("./log-in");
 }
 async function checkAuthorisation() {
   const unauthLocations = ["log", "sign"];
@@ -34,7 +34,7 @@ async function checkAuthorisation() {
           .map((location) => window.location.pathname.includes(location))
           .includes(true)
       ) {
-        window.location.replace("/integration");
+        window.location.replace("./integration");
       }
     } else if (!user) {
       // if (!unauthLocations.map((location) => window.location.pathname.includes(location)).includes(true)) {
