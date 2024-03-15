@@ -44,7 +44,7 @@ function authenticate() {
     .then(function ({ user }) {
       if (user) {
         user.getIdToken().then((t) => {
-          console.log(getIdToken);
+          console.log("token: ", t);
         });
         window.location.replace("/integration");
       } else {
